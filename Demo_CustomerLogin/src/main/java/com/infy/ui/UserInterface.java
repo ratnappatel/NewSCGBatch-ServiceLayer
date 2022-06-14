@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import com.infy.controller.CustomerLoginController;
 import com.infy.dto.CustomerLoginDTO;
 
+// Unit Testing for this UIInterface
 public class UserInterface {
 
 	private static final Log LOGGER = LogFactory.getLog(UserInterface.class);

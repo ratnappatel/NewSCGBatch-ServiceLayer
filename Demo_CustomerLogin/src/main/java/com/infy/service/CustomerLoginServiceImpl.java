@@ -7,11 +7,15 @@ import com.infy.repository.CustomerLoginRepositoryImpl;
 
 public class CustomerLoginServiceImpl implements CustomerLoginService {
 
+	//@Autowired = setter
 	private CustomerLoginRepository customerLoginRepository;
 
+	public CustomerLoginServiceImpl(CustomerLoginRepository customerLoginRepository) {
+		this.customerLoginRepository=customerLoginRepository;
+	}
 	public String authenticateCustomer(CustomerLoginDTO customerLoginDTO) throws InfyBankException {
 		String toReturn = null;
-		customerLoginRepository = new CustomerLoginRepositoryImpl();
+		//customerLoginRepository = new CustomerLoginRepositoryImpl();
 		CustomerLoginDTO customerLoginFromRepository = 
 				customerLoginRepository.getCustomerLoginByLoginName(customerLoginDTO.getLoginName());
 		
