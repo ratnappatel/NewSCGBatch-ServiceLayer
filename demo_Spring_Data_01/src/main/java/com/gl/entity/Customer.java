@@ -2,31 +2,42 @@ package com.gl.entity;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 //Not a regular java class hence put@Entity
 @Entity
-//@Table(name = "CustomerDetails")
+//@Table(name = "CustomerDetails") // when actual table name is different than the Entity classname
 public class Customer {
 	
 	@Id // this annotation considers that id column in Customer table must be Primary Key
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto_increment column
+	//@Column(name="Customer_id")
 	private int id;
+	
 	private String name;
+	
 	private String mobile;
+	
 	private int age;
+	
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Customer( String name, String mobile, int age) {
+	
+
+	public Customer(String name, String mobile, int age, String address) {
 		this.name = name;
 		this.mobile = mobile;
 		this.age = age;
 	}
+
+
 
 	public int getId() {
 		return id;
