@@ -42,6 +42,7 @@ public class DemoSpringData01Application implements CommandLineRunner
 		
 		//empService.getNoOfEmployeesByDepartment();
 		empService.departmentWiseMaxSalary();
+		empService.updateDepartment("David", 110);
 	}
 
 }

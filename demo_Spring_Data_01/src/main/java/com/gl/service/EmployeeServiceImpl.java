@@ -7,8 +7,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class EmployeeServiceImpl {
 
 	@PersistenceContext
@@ -30,6 +32,19 @@ public class EmployeeServiceImpl {
 		List<Object[]> res=query.getResultList();
 		for(Object obj[]:res)
 			System.out.println("Department Id "+obj[1]+" has Highest Salary as : "+obj[0]+" Employees");
+	}
+	
+	public void updateDepartment(String name, int deptId)
+	{
+		Query query=em.createQuery
+				("UPDATE Employee e SET e.departmentId=:id WHERE e.fname=:fname");
+		query.setParameter("id", deptId);
+		query.setParameter("fname", name);
+		Integer ra=query.executeUpdate();
+		if(ra>0)
+			System.out.println("Record Updated successfully..");
+		else
+			System.out.println("Couldn't update the record.");
 	}
 	
 }
