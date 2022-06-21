@@ -13,6 +13,7 @@ import com.gl.repository.EmployeeRepository;
 public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired EmployeeRepository repository;
+	
 	@Override
 	public List<Employee> getAllEmployee() {
 	
