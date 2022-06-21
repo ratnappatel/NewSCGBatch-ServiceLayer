@@ -1,5 +1,6 @@
 package com.gl.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,16 @@ public class CustomerServiceImpl implements CustomerService{
 	public String deleteCustomer(int id) {
 		repository.deleteById(id);
 		return "Success";
+	}
+
+	@Override
+	public List<Customer> getAllCustomer() {
+		return (List<Customer>) repository.findAll();
+	}
+
+	@Override
+	public Customer getCustomerByMobile(String mobile) {
+		return repository.findByMobile(mobile);
 	}
 
 }

@@ -2,16 +2,18 @@ package com.gl.entity;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 @Entity
-@Table(name="Customer2")
+@Table(name="Customer_Details")
 public class Customer {
 	
 	@Id
@@ -19,29 +21,29 @@ public class Customer {
 	//@TableGenerator
 	//@GeneratedValue(strategy=GenerationType.AUTO)// Persistence-Provider[Hibernate] 
 	//creating additional table called hibernate_sequence to manage Primary key Generation
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
-	@TableGenerator(
-            name="pkgen", 
-            table="id_gen", 
-            pkColumnName="gen_key", 
-            valueColumnName="gen_value",
-            pkColumnValue="cust_id",
-            allocationSize=1
-            )
-	@GeneratedValue(generator="pkgen",strategy=GenerationType.TABLE)
+	/*
+	 * @TableGenerator( name="pkgen", table="id_gen", pkColumnName="gen_key",
+	 * valueColumnName="gen_value", pkColumnValue="cust_id", allocationSize=1 )
+	 * 
+	 * @GeneratedValue(generator="pkgen",strategy=GenerationType.TABLE)
+	 */
 	
 	private int id;
 	
 	private String name;
 	private String mobile;
-	private String address;
+	
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "address_id",unique=true)
+	private Address address;
 	
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(String name, String mobile, String address) {
+	public Customer(String name, String mobile, Address address) {
 		this.name = name;
 		this.mobile = mobile;
 		this.address = address;
@@ -71,11 +73,11 @@ public class Customer {
 		this.mobile = mobile;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	
@@ -95,8 +97,10 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", mobile=" + mobile + ", address=" + address + "]";
+		return "Customer [id=" + id + ", name=" + name + ", mobile=" + mobile + ", \naddress=" + address.toString() + "]";
 	}
+
+	
 	
 	
 
