@@ -29,5 +29,26 @@ public class CustomerServiceImple implements CustomerService{
 	public Customer addCustomer(Customer c) {
 		return repository.save(c);
 	}
+
+	@Override
+	public String updateCustomerDetails(Customer c, int id) {
+		Customer existingCustomer=repository.findById(id).get();
+		if(existingCustomer!=null)
+		{
+			existingCustomer.setName(c.getName());
+			existingCustomer.setEmailId(c.getEmailId());
+			existingCustomer.setDateOfBirth(c.getDateOfBirth());
+			repository.save(existingCustomer);
+		}
+		else
+			return "fail";
+		return "Success";
+	}
+
+	@Override
+	public String removeCustomer(int id) {
+		repository.deleteById(id);
+		return "Success";
+	}
 	
 }

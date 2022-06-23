@@ -3,9 +3,11 @@ package com.gl.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,5 +41,26 @@ public class CustomerController {
 	public Customer addNewCustomer(@RequestBody Customer c)
 	{
 		return service.addCustomer(c);
+	}
+
+	@PutMapping("/customers/{custId}")
+	public String modifyCustomerDetails(@PathVariable("custId")Integer id,@RequestBody Customer c)
+	{
+		String result=service.updateCustomerDetails(c,id);
+		if(result.equalsIgnoreCase("success"))
+			return "Customer Details Updated Successfully..";
+		else
+			return "Customer Does Not Exists with ID :"+id;
+	}
+	
+	@DeleteMapping("/customers/{custId}")
+	public String deleteCustomerDetails(@PathVariable("custId")Integer id)
+	{
+		String result=service.removeCustomer(id);
+		if(result.equalsIgnoreCase("success"))
+			return "Customer Details Removed Successfully...";
+		else
+			return "Customer details does not exists..";
+		
 	}
 }
