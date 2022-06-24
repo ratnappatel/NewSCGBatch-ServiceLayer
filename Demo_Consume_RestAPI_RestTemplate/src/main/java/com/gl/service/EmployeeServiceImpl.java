@@ -46,5 +46,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		});
 		return employees;
 	}
+	@Override
+	public Employee addEmployee(Employee e) {
+		return repository.save(e);
+	}
+	@Override
+	public String updateEmployeeDetails(int id, Employee e) {
+	
+		Employee existingEmp=repository.findById(id).get();
+		existingEmp.setDepartmentId(e.getDepartmentId());
+		existingEmp.setFname(e.getFname());
+		existingEmp.setSalary(e.getSalary());
+		repository.save(existingEmp);
+		return "Success";
+	}
+	@Override
+	public String removeEmployeeDetails(int id) {
+		repository.deleteById(id);
+		return "Success";
+	}
 
 }
