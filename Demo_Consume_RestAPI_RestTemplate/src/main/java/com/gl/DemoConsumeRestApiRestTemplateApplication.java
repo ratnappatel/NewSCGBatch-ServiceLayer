@@ -20,10 +20,10 @@ public class DemoConsumeRestApiRestTemplateApplication implements CommandLineRun
 	@Override
 	public void run(String... args) throws Exception {
 		//getEmployee(201);
-		//getAllEmployees();
+		getAllEmployees();
 		//addNewEmployee();
 		//modifyEmployeeDetails();
-		removeEmployee();
+		//removeEmployee();
 	}
 	public void getEmployee(int id)
 	{

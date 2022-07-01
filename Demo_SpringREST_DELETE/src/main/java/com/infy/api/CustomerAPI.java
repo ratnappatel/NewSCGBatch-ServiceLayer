@@ -1,5 +1,6 @@
 package com.infy.api;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class CustomerAPI {
 	public ResponseEntity<String> addCustomer(@RequestBody CustomerDTO customer) throws InfyBankException {
 		Integer customerId = customerService.addCustomer(customer);
 		String successMessage = environment.getProperty("API.INSERT_SUCCESS") + customerId;
-		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
+		return new ResponseEntity<>(successMessage+"\n Time :"+new Date(), HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/customers/{customerId}")

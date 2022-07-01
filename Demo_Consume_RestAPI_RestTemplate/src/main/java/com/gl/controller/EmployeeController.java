@@ -41,7 +41,9 @@ public class EmployeeController {
 			return ResponseEntity.status(HttpStatus.OK)
 					.body("Employee Details are : "+emp);
 		} catch (Exception e) {
+			e.printStackTrace(); // sends exception details to server console
 			return ResponseEntity.badRequest().body("Employee with "+id+" does not exists.");// Prints on server console
+			// return statement sends exception details to client[?]
 		}		 
 	}
 
